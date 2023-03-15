@@ -8,22 +8,26 @@ import Event from './pages/Event'
 import User from './pages/User'
 import Profile from './pages/Profile'
 import Notifications from './pages/Notifications'
+import Navbar from './components/Navbar';
 
 
 function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route path='/signin' element={<SignIn/>} />
-          <Route path='/signup' element={<SignUp/>} />
-          <Route path='/events' element={<Events/>} />
-          <Route path='/users' element={<Users/>} />
-          <Route path='/event' element={<Event/>} />
-          <Route path='/user' element={<User/>} />
-          <Route path='/profile' element={<Profile/>} />
-          <Route path='/notifications' element={<Notifications/>} />
-        </Routes>
+        <div className="container">
+          <Routes>
+            <Route path='/signin' element={<SignIn/>} />
+            <Route path='/signup' element={<SignUp/>} />
+            <Route path='/events' element={<Events/>} />
+            <Route path='/users' element={<Users/>} />
+            <Route path='/event' element={<Event/>} />
+            <Route path='/user' element={<User/>} />
+            <Route path='/profile' element={<Profile/>} />
+            <Route path='/notifications' element={<Notifications/>} />
+          </Routes>
+        </div>
+        <Navbar/>
       </Router>
     </>
   );
