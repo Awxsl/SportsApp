@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Events from './pages/Events'
@@ -9,6 +10,8 @@ import User from './pages/User'
 import Profile from './pages/Profile'
 import Notifications from './pages/Notifications'
 import Navbar from './components/Navbar';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 function App() {
@@ -29,6 +32,7 @@ function App() {
         </div>
         <Navbar/>
       </Router>
+      <ToastContainer rtl={true} />
     </>
   );
 }
