@@ -34,11 +34,16 @@ function SignIn() {
           </div>
           <p className="inputLabel">كلمة المرور</p>
           <div className="inputItem">
-              <input dir="rtl" type={showPassword ? 'text' : 'password'} className="input" id='password' value={password} onChange={onChange} placeholder='ادخل كلمة المرور'/>
+              <div className="showPasswordDiv">
+                <input dir="rtl" type={showPassword ? 'text' : 'password'} className="input" id='password' value={password} onChange={onChange} placeholder='ادخل كلمة المرور'/>
+                <FaEye className={showPassword ? 'showPasswordIconActive' : 'showPasswordIcon'} onClick={() => {setShowPassword((prevState) => !prevState)}} />
+              </div>
           </div>
         </div>
         <div className="btnDiv"><button type="submit" className="btn btnPrimary">تسجيل الدخول</button></div>
-      <p className="gotoSignInOrUp">عندك حساب؟ سجل الدخول</p>
+      <Link to='/signup'>
+        <p className="gotoSignInOrUp">ماعندك حساب؟ سجل الان</p>
+      </Link>
       </form>
       </main>
     </>
