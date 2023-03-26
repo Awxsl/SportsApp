@@ -1,8 +1,12 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { FaEye } from "react-icons/fa"
+import { toast } from "react-toastify"
 
 function SignIn() {
+
+  const navigate = useNavigate()
 
   const[showPassword, setShowPassword] = useState(false)
   const[formData, setFormData] = useState({email: '', password: ''})
@@ -15,8 +19,17 @@ function SignIn() {
     }))
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
+
+    try {
+      const auth = getAuth()
+      await signInWithEmailAndPassword(auth, email, password)
+      toast.success('Signed In Successfully!')
+      navigate('/profile')
+    } catch (error) {
+      toast.error('Credentials are incorrect')
+    }
   }
 
   return (

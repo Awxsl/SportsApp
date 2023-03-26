@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
-import { serverTimestamp, addDoc, collection } from "firebase/firestore"
+import { serverTimestamp, setDoc, doc } from "firebase/firestore"
 import { auth } from "../firebase.config"
 import {toast} from 'react-toastify'
 import { FaEye } from "react-icons/fa"
@@ -38,7 +38,7 @@ function SignUp() {
         const geolocationRequestData = await geolocationRequest.json()
 
         if(geolocationRequestData.status === 'OK') {
-          const geolocationInfo = geolocationRequestData.results[0]?.geometry.location 
+          const geolocationInfo = geolocationRequestData.results[0]?.geometry.location
           formData.geolocation.latitude = geolocationInfo.lat 
           formData.geolocation.longitude = geolocationInfo.lng
         }
@@ -51,7 +51,7 @@ function SignUp() {
         formDataCopy.timestamp = serverTimestamp()
 
 
-        await addDoc(collection(db, 'users'), formDataCopy)
+        await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
         toast.success('تم تسجيل المستخدم')
         navigate('/events')
@@ -104,6 +104,8 @@ function SignUp() {
           <div className="inputItem">
             <input dir="rtl" type="text" className="input" id='location' value={location} onChange={onChange} placeholder='دخل عنوانك التفصيلي (الشارع، الحارة ...)' />
           </div>
+
+        {/* TODO: Add hobbies selection here */}
 
         </div>
         <div className="btnDiv"><button type="submit" className="btn btnPrimary">تسجيل</button></div>
