@@ -9,6 +9,7 @@ import Event from './pages/Event'
 import User from './pages/User'
 import Profile from './pages/Profile'
 import Notifications from './pages/Notifications'
+import AddEvent from './pages/AddEvent';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,6 +32,7 @@ function App() {
               <Route path='/profile' element={<Profile/>} />
             </Route>
             <Route path='/notifications' element={<Notifications/>} />
+            <Route path='/addEvent' element={<AddEvent/>} />
           </Routes>
         </div>
         <Navbar/>

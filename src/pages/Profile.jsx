@@ -58,7 +58,7 @@ function Profile() {
         </div>
         <div className="profileDetailedInfo">
           <p className='profileBioHeader'>عنّي</p>
-          <p className="profileBio">
+          <p className="profileBio" dir='rtl'>
             {user.bio}
           </p>
         </div>

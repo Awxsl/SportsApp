@@ -281,3 +281,7 @@ a {
   background-color: var(--primary-color);
   list-style-type: none;
 }
+
+.imageUpload {
+  margin-top: 1rem;
+}
