@@ -7,8 +7,6 @@
 
 body {
   font-family: 'IBM Plex Sans Arabic', sans-serif;
-  display: flex;
-  flex-direction: row-reverse;
 }
 
 p {
@@ -22,7 +20,9 @@ a {
 }
 
 .container {  
-  width: 100vw;
+  width: 100%;
+  /* display: flex;
+  flex-direction: row-reverse; */
   margin-bottom: 5rem;
 }
 
@@ -285,3 +285,77 @@ a {
 .imageUpload {
   margin-top: 1rem;
 }
+
+
+/* User Card */
+
+.usersList {
+  width: 100%;
+  padding: 1.5rem 0;
+}
+
+.userCard {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgrey;
+  border-radius: 1rem;
+  padding: 10px 0;
+  margin-bottom: 1rem;
+  transition: border ease 0.3s;
+}
+
+.userCard:hover {
+  border: 1px solid #999;
+}
+
+.userCardPic {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  margin: 0 1.5rem;
+}
+
+.userCardDetails {
+  padding-right: 1.5rem;
+  border-right: 1px solid lightgrey;
+}
+
+.userCardLocation, .preferedDays, .preferedTime {
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
+.userCardName {
+  font-size: 1.4rem;
+}
+
+.userCardGroup {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.userCardIcon {
+  padding-left: 0.3rem;
+  color: #5669FF;
+}
+
+.userCardDescription {
+  font-size: 0.75rem;
+  padding-bottom: 0.3rem;
+}
+
+.userCardDate {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-left: 1rem;
+}
+
+/* .preferedDays {
+  padding-left: 2rem;
+} */

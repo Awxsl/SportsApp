@@ -45,14 +45,10 @@ function AddEvent() {
 
 
         const imageUrls = await Promise.all( 
-          [...document.getElementById('images').files].map((picture, index) => {
-            const imageRef = document.getElementById('images')
-            const image = imageRef.files[index]
-            getImageUrl(image)
-          })
+          [...document.getElementById('images').files].map((picture) =>  getImageUrl(picture) )
         ).catch((e) => {
           toast.error(e)
-        }).then(() => console.log('sup'))
+        })
 
         const formDataCopy = {
           ...formData, 
@@ -63,7 +59,16 @@ function AddEvent() {
 
         delete formDataCopy.images
 
+        console.log(formDataCopy)
 
+        // setTimeout(() => {console.log(formDataCopy), 30})
+
+        await addDoc(collection(db, 'events'), formDataCopy)
+
+        navigate('/events')
+        toast.success('تم')
+
+        
         
     } catch (error) {
       console.log(error)
