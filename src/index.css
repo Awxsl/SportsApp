@@ -10,8 +10,8 @@ body {
 }
 
 p {
-  display: flex;
-  flex-direction: row-reverse;
+  /* display: flex;
+  flex-direction: row-reverse; */
   margin: 0;
 }
 
@@ -19,13 +19,34 @@ a {
   text-decoration: none;
 }
 
+ul {
+  padding: 0;
+}
+
+h3 {
+  margin: 0;
+  text-align: end;
+}
+
 .container {  
   width: 100%;
-  /* display: flex;
-  flex-direction: row-reverse; */
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
   margin-bottom: 5rem;
 }
 
+.main {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.header {
+  width: 100%;
+}
 
 /* Navbar */
 
@@ -79,6 +100,7 @@ a {
   font-size: 2.4rem;
   font-weight: 700;
   margin-top: 3rem;
+  text-align: end;
 }
 
 .signInPage {
@@ -103,6 +125,7 @@ a {
   font-size: 1.4rem;
   font-weight: 400;
   margin: 0 0.8rem 0.5rem 0.8rem;
+  text-align: end;
 }
 
 .input {
@@ -200,17 +223,25 @@ a {
   color: #000000;
 }
 
+.timeDateSelector {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+}
+
 
 /* Profile Page */
 
 .profileHeader {
   margin-top: 2rem;
   font-size: 1.8rem;
+  text-align: end;
   font-weight: 700;
 }
 
 .profileContainer {
-  margin: 4rem 2rem;  
+  margin: 4rem 2rem; 
+   
 }
 
 .profileBasicInfo {
@@ -234,7 +265,7 @@ a {
 .profileName {
   margin: 0;
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .profileItemGroup {
@@ -245,7 +276,7 @@ a {
 }
 
 .profileItemGroupIcon {
-  color: #8f8f8f;
+  color: #5669FF;
   padding-left: 1rem;
 }
 
@@ -258,6 +289,7 @@ a {
   font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  text-align: end;
 }
 
 .profileBio {
@@ -268,18 +300,27 @@ a {
 .profileHobbiesList {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-around;
+  justify-content: center;
+  /* align-items: center; */
   flex-wrap: wrap;
 }
 
+
 .hobby {
   font-size: 1rem;
+  width: 5rem;
   margin: 0.25rem 0.2rem;
-  padding: 0.8rem 1.6rem;
+  text-align: center;
+  padding: 0.5rem 0;
   border-radius: 30px;
   color: #fff;
-  background-color: var(--primary-color);
+  background-color: #5669FF;
   list-style-type: none;
+}
+
+.invitationStatus {
+  text-align: center;
+  font-size: 1.1rem;
 }
 
 .imageUpload {
@@ -330,6 +371,7 @@ a {
 
 .userCardName {
   font-size: 1.4rem;
+  text-align: end;
 }
 
 .userCardGroup {
@@ -356,6 +398,178 @@ a {
   margin-left: 1rem;
 }
 
-/* .preferedDays {
-  padding-left: 2rem;
-} */
+@media screen and (min-width: 768px) {
+  .userCardName {
+    font-size: 2rem;
+  }
+  
+  .userCardLocation, .preferedDays, .preferedTime {
+    font-size: 1.2rem;
+  }
+
+  .userCardDescription {
+    font-size: 1.4rem;
+  }
+
+}
+
+.btnLoad {
+  background-color: #5669FF;
+  color: #fff;
+  width: 14rem;
+  border-radius: 100px;
+}
+
+.logoutBtn {
+  background-color: #5669FF;
+  color: #fff;
+}
+
+
+/* Home Page */
+
+.homePage {
+
+}
+
+.homeHeading {
+  margin-bottom: 3rem;
+}
+
+.homeCards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  width: 100%;
+}
+
+.homeCardLink {
+  width: 100%;
+}
+
+
+.homeCard {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 30vh;
+  font-size: 1.4rem;
+  border-radius: 10px;
+  background: linear-gradient(261deg, rgba(252,70,107,1) 0%, rgba(86,105,255,1) 100%);
+  color: #fff;
+}
+
+.homeCard:hover {
+  cursor: pointer;
+}
+
+.homeCardHeading {
+  padding-right: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .homeCardHeading {
+    font-size: 3.2rem;
+  }
+}
+
+
+/* Invitations */
+
+.invitationList {
+
+}
+
+.invitationCard {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid lightgrey;
+  padding: 1.5rem 0.75rem;
+  border-radius: 10px;
+  margin-bottom: 0.7rem;
+}
+
+.invitationCardImage {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  /* margin-left: 2rem; */
+}
+
+.invitationCardDetails {
+  /* margin-right: 2rem; */
+}
+
+.invitationCardName {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.invitationCardDetailsDescription {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  text-align: start;
+}
+
+.invitationCardButtons {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invitationCardButtonsAccept, 
+.invitationCardButtonsReject {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 0.8rem;
+  border-radius: 5px;
+  height: 1.4rem;
+  width: 1.4rem;
+  cursor: pointer;
+}
+
+.invitationCardButtonsAccept {
+  margin-left: 0.5rem;
+  color: #32CD32;
+  background-color: #bfff6068;
+}
+
+.invitationCardButtonsReject {
+  color: #ff0000;
+  background-color: #ff656550;
+}
+
+@media screen and (min-width: 768px) {
+  .invitationCardImage {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .invitationCardName {
+    font-size: 3rem;
+  }
+
+  .invitationCardDetailsDescription {
+    font-size: 1.4rem;
+  }
+
+  .invitationCardButtonsAccept, 
+  .invitationCardButtonsReject {
+  font-size: 2rem;
+  padding: 0.8rem;
+  height: 4rem;
+  width: 4rem;
+}
+}
+
+.centeredMessage {
+  text-align: center;
+  margin-top: 5rem;
+}

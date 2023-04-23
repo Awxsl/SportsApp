@@ -1,34 +1,50 @@
 import {FaMapMarkerAlt, FaUser} from 'react-icons/fa'
 import {useState, useEffect} from 'react'
-import {getAuth, signOut} from 'firebase/auth'
+import { useParams } from 'react-router-dom'
+import {collection, query, where, orderBy, limit, getCountFromServer, getDocs, addDoc, serverTimestamp} from 'firebase/firestore'
+import {getAuth} from 'firebase/auth'
 import {doc, getDoc} from 'firebase/firestore'
 import {db} from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
 
-function Profile() {
+function UserProfile() {
 
+
+  const {userId} = useParams()
   const navigate = useNavigate()
   const[user, setUser] = useState(null)
   const[loading, setLoading] = useState(true)
+  const[invitationStatus, setInvitationStatus] = useState('notSent')
 
   const auth = getAuth()
 
-  const logout = async () => {
-    window.localStorage.removeItem('geolocation')
-    window.localStorage.removeItem('gender')
-    await signOut(auth)
-    navigate('/signin')
+  const sendInvite = async () => {
+    await addDoc(collection(db, 'invitations'), {
+      sentBy: auth.currentUser.uid, 
+      sentTo: userId, 
+      timestamp: serverTimestamp(),
+      status: 'pending' 
+    })
+    setInvitationStatus('pending')
+    
+    // navigate('/home')
   }
 
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await getDoc(doc(db, 'users', auth.currentUser.uid))
+      const response = await getDoc(doc(db, 'users', userId))
+      const collectionRef = collection(db, 'invitations')
+      const q = query(collectionRef, where('sentBy', '==', auth.currentUser.uid), where('sentTo', '==', userId))
+      const snapshot = await getDocs(q)
+      if(!snapshot.empty) {
+        snapshot.forEach((doc) => setInvitationStatus(doc.data().status))
+      }
       setUser(response.data())
       setLoading(false)
     }
     fetchUser()
-  }, [auth.currentUser.uid])
+  }, [])
 
 
   if(loading) {
@@ -66,12 +82,16 @@ function Profile() {
               <li className="hobby">الرماية</li>
               <li className="hobby">الجري</li>
               <li className="hobby">درّاج</li>
+              <li className="hobby">تنس</li>
+              <li className="hobby">المشي</li>
             </ul>
         </div>
-        <div className="btnDiv" onClick={logout}><button className="btn logoutBtn">تسجيل الخروج</button></div>
+        {invitationStatus === 'notSent' && <div className="btnDiv" onClick={sendInvite}><button className="btn logoutBtn">تواصل معي</button></div>}
+        {invitationStatus === 'pending' && <h3 className='invitationStatus'>ارسلت للمستخدم دعوة مسبقاً</h3>}
+        {invitationStatus === 'accepted' && <h3 className='invitationStatus'>Whatsapp</h3>}
       </div> 
   </div>
   )
 }
 
-export default Profile
+export default UserProfile

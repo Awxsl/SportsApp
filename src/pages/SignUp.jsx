@@ -15,18 +15,32 @@ function SignUp() {
   const navigate = useNavigate('/')
 
   const[showPassword, setShowPassword] = useState(false)
-  const[formData, setFormData] = useState({name: '', email: '', password: '', bio: '', location: '', age: 0, geolocation: {latitude: 0, longitude: 0}, avatarUrl: 'https://xsgames.co/randomusers/avatar.php?g=male'})
-  const{email, password, bio, location, age, name} = formData
+  const[formData, setFormData] = useState({name: '', email: '', password: '', gender: 'male', preferedDays: '', preferedTime: '', bio: '', location: '', city: '', area: '', sight: '', age: 0, geolocation: {latitude: 0, longitude: 0}, avatarUrl: 'https://xsgames.co/randomusers/avatar.php?g=male'})
+  const{email, password, bio, city, area, location, sight, age, name} = formData
 
   const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState, 
-      [e.target.id]: e.target.value
-    }))
+
+    if(e.target.id === 'city' || e.target.id === 'area' || e.target.id === 'sight') {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.id]: e.target.value, 
+        location: `${city}  ${area} ${sight}` 
+      }))
+    } else {      
+      setFormData((prevState) => ({
+        ...prevState, 
+        [e.target.id]: e.target.value
+      }))
+    }
   }
 
   const onSubmit = async (e) => {
     e.preventDefault()
+
+    if(bio.length < 100) {
+      toast.error('الوصف قصير')
+      return
+    }
 
     try {
         const auth = getAuth() 
@@ -53,6 +67,9 @@ function SignUp() {
 
         await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
+        window.localStorage.setItem('geolocation', JSON.stringify(formDataCopy.geolocation))
+        window.localStorage.setItem('gender', formDataCopy.gender)
+
         toast.success('تم تسجيل المستخدم')
         navigate('/events')
         
@@ -66,43 +83,87 @@ function SignUp() {
 
   return (
     <>
-      <header>
+      <header className="header">
         <p className="pageHeader">مستخدم جديد</p>
       </header>
-      <main>
+      <main className="main">
       <form onSubmit={onSubmit} className='signInForm'>
         <div className="signInPage">
         
           <p className="inputLabel">اسمك</p>
           <div className="inputItem">
-            <input dir="rtl" type="text" className="input" id='name' value={name} onChange={onChange} placeholder='دخل اسمك هنا' />
+            <input dir="rtl" type="text" className="input" id='name' value={name} onChange={onChange} placeholder='دخل اسمك هنا' required/>
           </div>
 
           <p className="inputLabel">البريد الالكتروني</p>
           <div className="inputItem">
-            <input dir="rtl" type="email" className="input" id='email' value={email} onChange={onChange} placeholder='دخل ايميلك هنا' />
+            <input dir="rtl" type="email" className="input" id='email' value={email} onChange={onChange} placeholder='دخل ايميلك هنا' required/>
           </div>
           <p className="inputLabel">كلمة المرور</p>
           <div className="inputItem">
               <div className="showPasswordDiv">
-                <input dir="rtl" type={showPassword ? 'text' : 'password'} className="input" id='password' value={password} onChange={onChange} placeholder='ادخل كلمة المرور'/>
+                <input dir="rtl" type={showPassword ? 'text' : 'password'} className="input" id='password' value={password} onChange={onChange} placeholder='ادخل كلمة المرور' required/>
                 <FaEye className={showPassword ? 'showPasswordIconActive' : 'showPasswordIcon'} onClick={() => {setShowPassword((prevState) => !prevState)}} />
               </div>
           </div>
           <p className="inputLabel">معلومات عنك</p>
           <div className="inputItem">
-            <textarea name="bio" id="bio" className="bioArea" placeholder="عرفنا عن نفسك وعن هواياتك" dir="rtl" value={bio} onChange={onChange}></textarea>
-            {/* <input dir="rtl" type="email" className="input" id='email' value={email} onChange={onChange} placeholder='دخل ايميلك هنا' /> */}
+            <textarea name="bio" id="bio" className="bioArea" placeholder="عرفنا عن نفسك وعن هواياتك" dir="rtl" value={bio} onChange={onChange} minLength={100} maxLength={500} required={true}></textarea>
           </div>
+
+          <div className="inputGroup">
+              <p className="inputLabel">الجنس</p>
+              <div className="inputItem">
+              <div className="inputItem">
+                <select className="input" id="gender" onChange={onChange} required>
+                  <option value="ذكر">ذكر</option>
+                  <option value="انثى">انثى</option>
+                </select>
+              </div>
+            </div>
+            </div>
 
           <p className="inputLabel">عمرك</p>
           <div className="inputItem">
-            <input dir="rtl" type="number" min={16} max={100} className="input" id='age' value={age} onChange={onChange} placeholder='دخل عمرك' />
+            <input dir="rtl" type="number" min={16} max={100} className="input" id='age' value={age} onChange={onChange} placeholder='دخل عمرك' required/>
           </div>
 
-          <p className="inputLabel">عنوانك</p>
+          <p className="inputLabel">مدينتك</p>
           <div className="inputItem">
-            <input dir="rtl" type="text" className="input" id='location' value={location} onChange={onChange} placeholder='دخل عنوانك التفصيلي (الشارع، الحارة ...)' />
+            <input dir="rtl" type="text" className="input" id='city' value={city} onChange={onChange} placeholder='المدينة المنورة' required/>
+          </div>
+          <p className="inputLabel">الحي</p>
+          <div className="inputItem">
+            <input dir="rtl" type="text" className="input" id='area' value={area} onChange={onChange} placeholder='سلطانة' required/>
+          </div>
+          <p className="inputLabel">معلم قريب من بيتك</p>
+          <div className="inputItem">
+            <input dir="rtl" type="text" className="input" id='sight' value={sight} onChange={onChange} placeholder='مسجد القبلتين' required/>
+          </div>
+
+          <div className="timeDateSelector">
+            <div className="inputGroup">
+              <p className="inputLabel">الوقت المفضّل</p>
+              <div className="inputItem">
+              <div className="inputItem">
+                <select className="input" id="preferedTime" onChange={onChange}>
+                  <option value="الصباح">الصباح</option>
+                  <option value="العصر">العصر</option>
+                  <option value="المغرب">المغرب</option>
+                  <option value="العشاء" >العشاء</option>
+                </select>
+              </div>
+            </div>
+            </div>
+            <div className="inputGroup">
+              <p className="inputLabel">الايام المفضّلة</p>
+              <div className="inputItem">
+                <select className="input dropDown" id="preferedDays" onChange={onChange}>
+                  <option value="ايام الاسبوع">ايام الاسبوع</option>
+                  <option value="الويكند">الويكند</option>
+                </select>
+              </div>
+            </div>
           </div>
 
         {/* TODO: Add hobbies selection here */}

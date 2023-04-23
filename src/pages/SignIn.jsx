@@ -1,10 +1,25 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth"
 import { FaEye } from "react-icons/fa"
 import { toast } from "react-toastify"
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "../firebase.config"
 
 function SignIn() {
+
+  const auth = getAuth()
+
+  // onAuthStateChanged(auth, async (user) => {
+  //   if(user) {
+  //     const response = await getDoc(doc(db, 'users', auth.currentUser.uid))
+  //     console.log(response)
+  //     const user = await response.json() 
+
+  //     window.localStorage.setItem('geolocation', JSON.stringify(user.geolocation))
+  //     window.localStorage.setItem('gender', user.gender)
+  //   }
+  // })
 
   const navigate = useNavigate()
 
@@ -23,11 +38,18 @@ function SignIn() {
     e.preventDefault()
 
     try {
-      const auth = getAuth()
       await signInWithEmailAndPassword(auth, email, password)
-      toast.success('Signed In Successfully!')
-      navigate('/profile')
+        console.log(auth.currentUser.uid)
+        const response = await getDoc(doc(db, 'users', auth.currentUser.uid))
+        console.log(response)
+        const user = await response.data()
+        window.localStorage.setItem('geolocation', JSON.stringify(user.geolocation))
+        window.localStorage.setItem('gender', user.gender)
+        toast.success('Signed In Successfully!')
+        navigate('/profile')
+
     } catch (error) {
+      console.log(error)
       toast.error('Credentials are incorrect')
     }
   }
@@ -37,7 +59,7 @@ function SignIn() {
       <header>
         <p className="pageHeader">!ياهلا والله</p>
       </header>
-      <main>
+      <main className="main">
       <form onSubmit={onSubmit} className='signInForm'>
         <div className="signInPage">
         
