@@ -12,7 +12,7 @@ function Home() {
             <h2 className="homeCardHeading">الافراد</h2>
           </div>
         </Link>
-        <Link to='/event' className="homeCardLink">
+        <Link to='/events' className="homeCardLink">
           <div className="homeCard">
             <h2 className="homeCardHeading">الفعاليات</h2>
           </div>

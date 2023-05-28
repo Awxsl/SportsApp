@@ -1,10 +1,10 @@
 import {FaRegCalendarAlt, FaClock, FaMapMarkerAlt, FaLocationArrow} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-function UserCard({user}) {
+function EventCard({user}) {
 
 
-  const{name, avatarUrl, bio, preferedDays, preferedTime, city, area, geolocation, userRef} = user.data
+  const{name, imageUrls, description, timestamp, startAt, location, geolocation, userRef} = user.data
 
   const loggedInGeolocation = JSON.parse(window.localStorage.getItem('geolocation'))
 
@@ -24,28 +24,33 @@ function UserCard({user}) {
     return (d/1000) + 0.1
   }
 
+  const getDate = (date) => {
+    const time = new Date(timestamp.seconds*1000).toISOString().split('T')[0]
+    return time
+  }
+
   return (
     <Link to={`/users/${userRef}`} style={{ color: 'black' }}>
       <div className="userCard">
-      <img src={avatarUrl}
+      <img src={imageUrls[0]}
       alt="Profile Pic" className="userCardPic" />
       <div className="userCardDetails">
         <div className="userCardGroup">
           <FaMapMarkerAlt className='userCardIcon' />
-          <p className="userCardLocation">{`${city}، ${area}`}</p>
+          <p className="userCardLocation">{`${location}`}</p>
         </div>
         <p className="userCardName">{name}</p>
         <p className="userCardDescription" dir='rtl'>
-          {bio.substring(0, 80) + '...'}
+          {description.substring(0, 80) + '...'}
         </p>
         <div className="userCardDate">
           <div className="userCardGroup">
             <FaRegCalendarAlt className='userCardIcon' />
-            <p className="preferedDays">{preferedDays}</p>
+            <p className="preferedDays">{getDate(timestamp)}</p>
           </div>
           <div className="userCardGroup">
             <FaClock className='userCardIcon' />
-            <p className="preferedTime">{preferedTime}</p>
+            <p className="preferedTime" dir='rtl'>{startAt}</p>
           </div>
           <div className="userCardGroup">
             <FaLocationArrow className='userCardIcon' />
@@ -59,4 +64,4 @@ function UserCard({user}) {
   )
 }
 
-export default UserCard
+export default EventCard

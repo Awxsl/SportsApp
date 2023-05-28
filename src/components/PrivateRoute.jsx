@@ -16,7 +16,6 @@ function PrivateRoute() {
         setCheckStatus(false)
         } 
         setCheckStatus(false)
-        
     })
 
     if(checkStatus) {

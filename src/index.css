@@ -35,7 +35,7 @@ h3 {
   display: flex;
   flex-direction: column; 
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   margin-bottom: 5rem;
 }
 
@@ -572,4 +572,27 @@ h3 {
 .centeredMessage {
   text-align: center;
   margin-top: 5rem;
+}
+
+.eventWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh;
+}
+
+.addEvent {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 24px;
+  background-color: #fee;
+  padding: 1rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  outline: none;
+  margin-bottom: 5rem;
+}
+
+.addEvent:hover {
+  background-color: #ccc;
 }

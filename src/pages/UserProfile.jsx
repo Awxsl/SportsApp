@@ -27,7 +27,7 @@ function UserProfile() {
     })
     setInvitationStatus('pending')
     
-    // navigate('/home')
+    navigate('/home')
   }
 
 

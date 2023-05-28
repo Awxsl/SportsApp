@@ -124,7 +124,7 @@ function AddEvent() {
 
           <p className="inputLabel">معلومات الفعالية</p>
           <div className="inputItem">
-            <textarea name="description" id="description" className="bioArea" placeholder="عطنا معلومات اكثر عن الفعالية" dir="rtl" value={description} onChange={onChange}></textarea>
+            <textarea name="description" id="description" className="bioArea" minLength={100} maxLength={500} placeholder="عطنا معلومات اكثر عن الفعالية" dir="rtl" value={description} onChange={onChange}></textarea>
           </div>
 
           <p className="inputLabel">العدد الاقصى للمشاركين</p>
