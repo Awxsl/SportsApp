@@ -27,7 +27,7 @@ function UserProfile() {
     })
     setInvitationStatus('pending')
     
-    navigate('/home')
+    // navigate('/home')
   }
 
 
@@ -56,7 +56,7 @@ function UserProfile() {
    <p className="profileHeader">الملف الشخصي</p>
       <div className="profileContainer">
         <div className="profileBasicInfo">
-          <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile" className="profilePicture"/>
+          <img src={user.avatarUrl} alt="profile" className="profilePicture"/>
           <div className="profilePersonalInfo">
             <h1 className="profileName" dir='rtl'>{user.name}</h1>
             <div className="profileItemGroup">
@@ -88,7 +88,7 @@ function UserProfile() {
         </div>
         {invitationStatus === 'notSent' && <div className="btnDiv" onClick={sendInvite}><button className="btn logoutBtn">تواصل معي</button></div>}
         {invitationStatus === 'pending' && <h3 className='invitationStatus'>ارسلت للمستخدم دعوة مسبقاً</h3>}
-        {invitationStatus === 'accepted' && <h3 className='invitationStatus'>Whatsapp</h3>}
+        {invitationStatus === 'accepted' && <h3 className='invitationStatus'>Accepted!</h3>}
       </div> 
   </div>
   )

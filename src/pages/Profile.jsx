@@ -40,7 +40,7 @@ function Profile() {
    <p className="profileHeader">الملف الشخصي</p>
       <div className="profileContainer">
         <div className="profileBasicInfo">
-          <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile" className="profilePicture"/>
+          <img src={user.avatarUrl} alt="profile" className="profilePicture"/>
           <div className="profilePersonalInfo">
             <h1 className="profileName" dir='rtl'>{user.name}</h1>
             <div className="profileItemGroup">

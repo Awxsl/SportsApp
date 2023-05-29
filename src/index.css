@@ -413,6 +413,10 @@ h3 {
 
 }
 
+.hide {
+  display: none;
+}
+
 .btnLoad {
   background-color: #5669FF;
   color: #fff;

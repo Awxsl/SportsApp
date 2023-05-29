@@ -15,7 +15,7 @@ function SignUp() {
   const navigate = useNavigate('/')
 
   const[showPassword, setShowPassword] = useState(false)
-  const[formData, setFormData] = useState({name: '', email: '', password: '', gender: 'male', preferedDays: '', preferedTime: '', bio: '', location: '', city: '', area: '', sight: '', age: 0, geolocation: {latitude: 0, longitude: 0}, avatarUrl: 'https://xsgames.co/randomusers/avatar.php?g=male'})
+  const[formData, setFormData] = useState({name: '', email: '', password: '', gender: 'male', preferedDays: '', preferedTime: '', bio: '', location: '', city: '', area: '', sight: '', age: 0, geolocation: {latitude: 0, longitude: 0}, avatarUrl: `https://xsgames.co/randomusers/assets/avatars/male/${Math.floor(Math.random() * 78) + 1}.jpg`})
   const{email, password, bio, city, area, location, sight, age, name} = formData
 
   const onChange = (e) => {
@@ -71,7 +71,7 @@ function SignUp() {
         window.localStorage.setItem('gender', formDataCopy.gender)
 
         toast.success('تم تسجيل المستخدم')
-        navigate('/events')
+        navigate('/')
         
     } catch (error) {
       console.log(error)
@@ -116,8 +116,8 @@ function SignUp() {
               <div className="inputItem">
               <div className="inputItem">
                 <select className="input" id="gender" onChange={onChange} required>
-                  <option value="ذكر">ذكر</option>
-                  <option value="انثى">انثى</option>
+                  <option value="male">ذكر</option>
+                  <option value="female">انثى</option>
                 </select>
               </div>
             </div>

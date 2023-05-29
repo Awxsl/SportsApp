@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function EventCard({user}) {
 
 
-  const{name, imageUrls, description, timestamp, startAt, location, geolocation, userRef} = user.data
+  const{name, imageUrls, description, timestamp, day, startAt, location, geolocation, userRef} = user.data
 
   const loggedInGeolocation = JSON.parse(window.localStorage.getItem('geolocation'))
 
@@ -46,7 +46,7 @@ function EventCard({user}) {
         <div className="userCardDate">
           <div className="userCardGroup">
             <FaRegCalendarAlt className='userCardIcon' />
-            <p className="preferedDays">{getDate(timestamp)}</p>
+            <p className="preferedDays">{day}</p>
           </div>
           <div className="userCardGroup">
             <FaClock className='userCardIcon' />

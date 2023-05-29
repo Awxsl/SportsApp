@@ -3,11 +3,9 @@ import {collection, query, getDocs, where, orderBy, limit} from 'firebase/firest
 import { FaPlus } from "react-icons/fa"
 import {db} from '../firebase.config'
 import { useEffect, useState } from 'react'
-import { useNavigate, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function UsersList() {
-
-  const navigate = useNavigate()
 
   const[users, setUsers] = useState([])
   const[isLoading, setIsLoading] = useState(true)

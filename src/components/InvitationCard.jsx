@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 function InvitationCard({invite}) {
 
     const[loading, setLoading] = useState(true)
+    const[done, setDone]= useState(false)
     const[user, setUser] = useState({}) 
     const{name, bio, avatarUrl} = user
 
@@ -26,9 +27,11 @@ function InvitationCard({invite}) {
         if(e.target.id === 'Reject') {
             await updateDoc(doc(db, 'invitations', invite.id), {status: 'rejected'})
             console.log('reject')
+            setDone(true)
         } 
         else {
             await updateDoc(doc(db, 'invitations', invite.id), {status: 'accepted'})
+            setDone(true)
             console.log('accept')
         } 
     }
@@ -38,7 +41,7 @@ function InvitationCard({invite}) {
     }
 
   return (
-    <div className="invitationCard" key={invite.id}>
+    <div className={done ? "invitationCard hide" : "invitationCard"} key={invite.id}>
         <img src={avatarUrl} alt="dsd" className="invitationCardImage"/>
         <Link style={{ color: 'black' }} to={`/users/${invite.data.sentBy}`}>
             <div className="invitationCardDetails">
